@@ -1,0 +1,42 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test-publish-npm:
+    name: It publishes a PyPI package in a folder
+    runs-on: ubuntu-latest
+    environment: Publish to PyPI
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | python3 -
+        shell: bash
+      - name: Set unique package version
+        id: set-version
+        run: |
+          version=0.0.${{ github.run_number }}
+          poetry version $version
+          echo "::set-output name=version::$version"
+        working-directory: "test/cucumber-test-release-automation"
+      - name: Test the action
+        uses: ./
+        with:
+          pypi-token: ${{ secrets.PYPI_TOKEN }}
+          working-directory: "test/cucumber-test-release-automation"
+      - name: Assert that latest published package version is as expected
+        timeout-minutes: 1
+        run: |
+          version="0.0.${{ github.run_number }}" ]]
+          # use an eventually loop to give indexes time to update
+          while ! curl -v https://pypi.org/pypi/cucumber-test-release-automation/$version/json --fail
+          do
+            echo "Trying again in 5 seconds..."
+            sleep 5
+          done
