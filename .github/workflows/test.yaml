@@ -25,6 +25,9 @@ jobs:
           poetry version $version
           echo "::set-output name=version::$version"
         working-directory: "test/cucumber-test-release-automation"
+      - name: Uninstall poetry again (the action should do this itself)
+        run: curl -sSL https://install.python-poetry.org | python3 - --uninstall
+        shell: bash
       - name: Test the action
         uses: ./
         with:
