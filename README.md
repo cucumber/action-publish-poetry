@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: Release
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
