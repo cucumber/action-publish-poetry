@@ -23,7 +23,6 @@ jobs:
         run: |
           version=0.0.${{ github.run_number }}
           poetry version $version
-          echo "::set-output name=version::$version"
         working-directory: "test/cucumber-test-release-automation"
       - name: Uninstall poetry again (the action should do this itself)
         run: curl -sSL https://install.python-poetry.org | python3 - --uninstall
@@ -36,7 +35,7 @@ jobs:
       - name: Assert that latest published package version is as expected
         timeout-minutes: 1
         run: |
-          version="0.0.${{ github.run_number }}" ]]
+          version="0.0.${{ github.run_number }}"
           # use an eventually loop to give indexes time to update
           while ! curl -v https://pypi.org/pypi/cucumber-test-release-automation/$version/json --fail
           do
