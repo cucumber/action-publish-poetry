@@ -16,13 +16,13 @@ runs:
       shell: bash
     - run: poetry install
       shell: bash
-      working-directory: python
+      working-directory: ${{ inputs.working-directory }}
     - run: poetry build
       shell: bash
-      working-directory: python
+      working-directory: ${{ inputs.working-directory }}
     - run: poetry config pypi-token.pypi "${{ inputs.pypi-token }}"
       shell: bash
-      working-directory: python
+      working-directory: ${{ inputs.working-directory }}
     - run: poetry publish
       shell: bash
-      working-directory: python
+      working-directory: ${{ inputs.working-directory }}
