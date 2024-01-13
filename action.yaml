@@ -1,9 +1,6 @@
 name: 'Publish to PyPI'
-description: 'Publish an python package from a poetry pyproject.toml'
+description: 'Publish an python package using the poetry build system'
 inputs:
-  pypi-token: 
-    description: "Authentication token to use when publishing to PyPI"
-    required: true
   working-directory:
     description: "Path within the repo to the folder where the myproject.toml file lives"
     required: false
@@ -12,24 +9,17 @@ runs:
   using: "composite"
   steps:
     - name: Install Poetry
-      run: curl -sSL https://install.python-poetry.org | python3 -
-      shell: bash
-    - run: poetry install
-      shell: bash
+      uses: snok/install-poetry@v1
+      with: 
+        version: 1.6.1
+    - name: Install dependencies
+      run: poetry install
       working-directory: ${{ inputs.working-directory }}
-    - run: poetry build
-      shell: bash
+    - name: Build
+      run: poetry build
       working-directory: ${{ inputs.working-directory }}
-    - name: validate input
-      shell: bash
-      run: |
-        if [ -z "${{ inputs.pypi-token }}" ]; then
-          echo "pypi-token is required"
-          exit 1
-        fi;
-    - run: poetry config pypi-token.pypi "${{ inputs.pypi-token }}"
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-    - run: poetry publish
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
+    - name: Publish package distributions to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+          packages-dir: ${{ inputs.working-directory }}/dist/
+          skip-existing: true
