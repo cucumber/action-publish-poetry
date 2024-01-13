@@ -11,6 +11,8 @@ jobs:
     name: It publishes a PyPI package in a folder
     runs-on: ubuntu-latest
     environment: Publish to PyPI
+    permissions:
+      id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
