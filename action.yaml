@@ -14,9 +14,11 @@ runs:
         version: 1.6.1
     - name: Install dependencies
       run: poetry install
+      shell: bash
       working-directory: ${{ inputs.working-directory }}
     - name: Build
       run: poetry build
+      shell: bash
       working-directory: ${{ inputs.working-directory }}
     - name: Publish package distributions to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
