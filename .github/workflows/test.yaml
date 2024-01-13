@@ -16,22 +16,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install Poetry
-        run: curl -sSL https://install.python-poetry.org | python3 -
-        shell: bash
       - name: Set unique package version
         id: set-version
         run: |
-          version=0.0.${{ github.run_number }}
-          poetry version $version
-        working-directory: "test/cucumber-test-release-automation"
-      - name: Uninstall poetry again (the action should do this itself)
-        run: curl -sSL https://install.python-poetry.org | python3 - --uninstall
+          sed -i -e "s/\(version *= *\"\[0-9]*\.[0-9]*\.)[0-9]*\(\"\)/\1${{ github.run_number }}\2/" pyproject.toml
         shell: bash
+        working-directory: "test/cucumber-test-release-automation"
       - name: Test the action
         uses: ./
         with:
-          pypi-token: ${{ secrets.PYPI_TOKEN }}
           working-directory: "test/cucumber-test-release-automation"
       - name: Assert that latest published package version is as expected
         timeout-minutes: 1
