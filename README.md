@@ -8,7 +8,6 @@ Needs Python to be installed first.
 
 ## Inputs
 
-* `pypi-token`
 * `working-directory` (optional, default `.`)
 
 ## Example
@@ -33,6 +32,5 @@ jobs:
           python-version: "3.10"
       - uses: cucumber/action-publish-pypi@v1.0.0
         with:
-          npm-token: ${{ secrets.PYPI_TOKEN }}
           working-directory: "python"
 ```
