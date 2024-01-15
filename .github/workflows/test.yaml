@@ -21,7 +21,7 @@ jobs:
       - name: Set unique package version
         id: set-version
         run: |
-          sed -i -e "s/\(version *= *\"[0-9]*\.[0-9]*\)\.[0-9]*\(\"\)/\1.${{ github.run_number }}\2/" pyproject.toml
+          sed -i -e "s/\(version *= *\"[0-9]*\.[0-9]*\)\.[0-9]*\(\"\)/\1.${{ github.run_number }}\2/" setup.py
         shell: bash
         working-directory: "test/cucumber-test-release-automation"
       - name: Test the action

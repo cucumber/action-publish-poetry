@@ -1,5 +1,5 @@
 name: 'Publish to PyPI'
-description: 'Publish an python package using the poetry build system'
+description: 'Publish an python package using the setuptools build system'
 inputs:
   working-directory:
     description: "Path within the repo to the folder where the myproject.toml file lives"
@@ -8,16 +8,18 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with: 
-        version: 1.6.1
-    - name: Install dependencies
-      run: poetry install
+    - name: Install Python package dependencies
+      run: |
+        python -m pip install -U pip setuptools wheel twine
+        pip install -e .
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-    - name: Build
-      run: poetry build
+    - name: Build dist
+      run: python setup.py sdist bdist_wheel
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+    - name: Check dist
+      run: twine check dist/*
       shell: bash
       working-directory: ${{ inputs.working-directory }}
     - name: Publish package distributions to PyPI
