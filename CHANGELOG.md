@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0] - 2024-01-15
 ### Changed
 - Change to use setuptools with direct call to setup.py. This is to adapt to the current setup in cucumber/tag-expressions and cucumber/gherkin.
 
@@ -18,5 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First release
 
 [Unreleased]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...HEAD
+[2.0.0]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...v2.0.0
 [1.1.0]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...v1.1.0
 [1.0.0]: https://github.com/cucumber/action-publish-poetry/compare/v0.0.0...1.0.0
