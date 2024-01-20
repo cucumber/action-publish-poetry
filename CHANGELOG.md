@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.0] - 2024-01-20
 ### Changed
 - Change to build as build frontend and setuptools as build backend. This is to adapt to the setup in cucumber/ci-environment.
 
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First release
 
 [Unreleased]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...HEAD
+[3.0.0]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...v3.0.0
 [2.0.0]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...v2.0.0
 [1.1.0]: https://github.com/cucumber/action-publish-poetry/compare/1.0.0...v1.1.0
 [1.0.0]: https://github.com/cucumber/action-publish-poetry/compare/v0.0.0...1.0.0
